@@ -36,8 +36,13 @@ output = rdf.flatMap(lambda line: [(line[0], word) for word in line[1].lower().s
 .map(lambda x: (x[0][0], [(x[0][1].replace('file:/Users/maxrojas/Desktop/job search/mondra/Mondra Data-Engineering-Test/dataset/',''))]))\
 .reduceByKey(lambda x, y: x+y)
 data = output.collect()
+data = reduce_list(data)
 print(data)
 words_list = final_df.select('words_stemmed').rdf.flatMap(list).collect()
 word_list = [x for y in words_list for x in y]
 #new_dict = {x: y for y, x in enumerate(reduce_list(words_list))}
 new_dict = {x: idx if not x.isdigit() else int(x) for idx, x in enumerate(set(reduce_list(words_list)))}
+#test = reduce_list(data)
+#for x, dictionary in enumerate(new_dict):
+#    for y, value in enumerate(dictionary):
+#        dictionary[value] = test[x][y]
