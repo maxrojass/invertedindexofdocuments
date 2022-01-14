@@ -49,7 +49,7 @@ words_list = final_df.select('words_stemmed').rdd.flatMap(list).collect()
 word_list = [x for y in words_list for x in y]
 #new_dict = {x: y for y, x in enumerate(reduce_list(words_list))}
 new_dict = {x: idx if not x.isdigit() else int(x) for idx, x in enumerate(set(reduce_list(words_list)))}
-#test = reduce_list(data)
+print(new_dict)
 #for x, dictionary in enumerate(new_dict):
 #    for y, value in enumerate(dictionary):
 #        dictionary[value] = test[x][y]
